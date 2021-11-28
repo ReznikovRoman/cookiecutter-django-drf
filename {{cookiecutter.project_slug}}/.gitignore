@@ -1,0 +1,52 @@
+syntax: glob
+*.pyc
+*.pyo
+*.DS_Store 
+*.installed.cfg
+*build/
+local_settings.py
+*dist/
+*.egg-info/
+*~
+.idea/
+__pycache__/
+/__pycache__/
+*/__pycache__/
+
+# local files
+*docker-compose-dev.yml
+*local.Dockerfile
+*local.Makefile
+*local-linter.sh
+*requirements.local.*
+*dev.conf
+
+# media
+media*
+
+# static
+static*
+
+# ENV data
+env*
+venv*
+venv/
+*.env
+.env.local
+.env.*.local
+
+# logs
+{{cookiecutter.django_app_slug}}/logs
+
+# celery, celery beat
+celerybeat-schedule
+*.pid
+
+# whoosh index
+*.toc
+*.seg
+
+# js
+*comment.jsx
+*commentbox.jsx
+*commentform.jsx

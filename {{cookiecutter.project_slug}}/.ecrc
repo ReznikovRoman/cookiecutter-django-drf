@@ -1,0 +1,20 @@
+{
+  "Verbose": false,
+  "Debug": false,
+  "IgnoreDefaults": false,
+  "SpacesAftertabs": false,
+  "NoColor": false,
+  "Exclude": [
+    "\\.sqlite3$",
+    "\\.mo$",
+    "\\.txt$",
+    "media*",
+    "static*",
+    "migrations*"
+  ],
+  "AllowedContentTypes": [],
+  "PassedFiles": [],
+  "Disable": {
+    "IndentSize": true
+  }
+}

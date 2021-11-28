@@ -1,0 +1,99 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_DEFAULT_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_DEFAULT_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - .:/app
+      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - app-network
+
+  redis:
+    image: redis:6-alpine
+    expose:
+      - 6379
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+
+  server:
+    build: .
+    env_file:
+      - $ENV
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: >
+      bash -c "cd /app/{{cookiecutter.project_slug}}/
+      && python manage.py migrate
+      && python manage.py collectstatic --no-input
+      && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+      - redis
+    networks:
+      app-network:
+        aliases:
+          - server
+
+  celery:
+    build: .
+    restart: always
+    command: >
+      bash -c "cd /app/{{cookiecutter.project_slug}}/
+      && celery -A {{cookiecutter.django_app_slug}} worker -l info"
+    volumes:
+      - .:/app
+    env_file:
+      - $ENV
+    links:
+      - redis
+    depends_on:
+      - db
+      - redis
+      - server
+    networks:
+      - app-network
+
+  celery-beat:
+    build: .
+    restart: always
+    command: >
+      bash -c "cd /app/{{cookiecutter.project_slug}}/
+      && celery -A {{cookiecutter.django_app_slug}} beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    volumes:
+      - .:/app
+    env_file:
+      - $ENV
+    depends_on:
+      - db
+      - redis
+      - server
+    networks:
+      - app-network
+
+  flower:
+    image: mher/flower:0.9.5
+    env_file:
+      - ${ENV}
+    networks:
+      app-network:
+        aliases:
+          - flower
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  app-network:
+    driver: bridge

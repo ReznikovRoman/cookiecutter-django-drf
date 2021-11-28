@@ -1,0 +1,13 @@
+{
+  "full_name": "Roman Reznikov",
+  "email": "romanreznikov2002@yandex.ru",
+  "github_username": "ReznikovRoman",
+  "project_name": "Django Project",
+  "django_app_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "project_slug": "{{ cookiecutter.django_app_slug }}_app",
+  "project_short_description": "",
+  "timezone": "Europe/Moscow",
+  "use_sentry": "y",
+  "use_pycharm": "y",
+  "use_black": "n"
+}
