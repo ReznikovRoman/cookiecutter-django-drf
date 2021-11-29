@@ -1,11 +1,14 @@
-from .base import *  # noqa: F401, F403
+import logging
 
 {% if cookiecutter.use_sentry == 'y' -%}
 import sentry_sdk
 from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
 {%- endif %}
+
+from .base import *  # noqa: F401, F403
 
 
 DEBUG = False
@@ -49,13 +52,22 @@ else:
 
 {% if cookiecutter.use_sentry == 'y' -%}
 # SENTRY
+SENTRY_DSN = os.environ.get("SENTRY_DSN")
+SENTRY_LOG_LEVEL = os.environ.get("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
+SENTRY_ENVIRONMENT = os.environ.get("DJANGO_SENTRY_ENVIRONMENT", "production")
+
 SENTRY_CONF = sentry_sdk.init(
-    dsn=os.environ.get("SENTRY_DSN"),
+    dsn=SENTRY_DSN,
     integrations=[
+        LoggingIntegration(
+            level=SENTRY_LOG_LEVEL,
+            event_level=logging.ERROR,
+        ),
         DjangoIntegration(),
         CeleryIntegration(),
         RedisIntegration(),
     ],
+    environment=SENTRY_ENVIRONMENT,
     send_default_pii=True,
 )
 {%- endif %}
