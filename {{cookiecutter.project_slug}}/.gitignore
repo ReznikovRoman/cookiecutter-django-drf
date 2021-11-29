@@ -27,14 +27,6 @@ media*
 # static
 static*
 
-# ENV data
-env*
-venv*
-venv/
-*.env
-.env.local
-.env.*.local
-
 # logs
 {{cookiecutter.django_app_slug}}/logs
 
@@ -50,3 +42,9 @@ celerybeat-schedule
 *comment.jsx
 *commentbox.jsx
 *commentform.jsx
+
+# env data
+venv*
+venv/
+.env.local
+.env.*.local
