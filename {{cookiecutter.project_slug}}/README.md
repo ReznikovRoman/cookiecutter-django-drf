@@ -1,7 +1,7 @@
 # {{cookiecutter.project_name}}
 {{cookiecutter.project_short_description}}
 
-### Technologies:
+## Technologies:
 - Django 3
 - DRF
 - Postgres
@@ -115,7 +115,7 @@ DJANGO_SENTRY_ENVIRONMENT=<production>
 
 ```
 
-**Start project:**
+### Start project:
 
 Local:
 ```shell
@@ -126,7 +126,7 @@ docker-compose -f docker-compose-local.yml up
 Migrations will be applied automatically.
 
 
-**Code style:**
+## Code style:
 
 Before pushing a commit run all linters:
 
@@ -146,10 +146,16 @@ make check-docker
 ```
 
 
-**pre-commit:**
+### pre-commit:
 
 To configure pre-commit on your local machine:
 ```shell
 docker-compose -f docker-compose-local.yml build
 docker-compose -f docker-compose-local.yml run --rm server sh -c "pre-commit install"
 ```
+
+## Project guides
+
+- [Python styleguide](./docs/guides/python_guide.md)
+- [Django styleguide](./docs/guides/django_guide.md)
+

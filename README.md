@@ -6,7 +6,7 @@
 $ pip install "cookiecutter>=1.7.0"
 ```
 
-2. Run it against this repo
+2. Run it against this repository
 ```shell
 $ cookiecutter https://github.com/ReznikovRoman/cookiecutter-django-drf
 ```
