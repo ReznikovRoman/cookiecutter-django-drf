@@ -1,5 +1,4 @@
 import os
-import shutil
 
 
 TERMINATOR = "\x1b[0m"
@@ -11,25 +10,29 @@ SUCCESS = "\x1b[1;32m [SUCCESS]: "
 DEBUG_VALUE = "debug"
 
 
-def append_to_project_gitignore(path):
+def append_to_project_gitignore(path: str) -> None:
     gitignore_file_path = ".gitignore"
     with open(gitignore_file_path, "a") as gitignore_file:
         gitignore_file.write(path)
         gitignore_file.write(os.linesep)
 
 
-def append_to_gitignore_file(s):
+def append_to_gitignore_file(text: str) -> None:
     with open(".gitignore", "a") as gitignore_file:
-        gitignore_file.write(s)
+        gitignore_file.write(text)
         gitignore_file.write(os.linesep)
 
 
-def main():
-    append_to_gitignore_file(".env")
-    append_to_gitignore_file("makefile.env")
-    append_to_gitignore_file(".envs/*")
+def main() -> None:
+    ignored_filenames = [
+        ".env",
+        "makefile.env",
+        ".envs/*",
+    ]
+    for ignored_filename in ignored_filenames:
+        append_to_gitignore_file(ignored_filename)
 
-    print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
+    print(SUCCESS + "Project initialized!" + TERMINATOR)
 
 
 if __name__ == "__main__":
