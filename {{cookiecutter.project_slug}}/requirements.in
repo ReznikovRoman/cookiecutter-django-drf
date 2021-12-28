@@ -1,5 +1,5 @@
 # Python
-pillow==8.3.1
+pillow==8.4.0
 requests==2.26.0
 shortuuid==1.0.1
 python-slugify==5.0.2
@@ -18,7 +18,6 @@ django-tinymce==3.3.0
 django-celery-beat==2.2.1
 django-cleanup==5.2.0
 django-redis-sessions==0.6.2
-model-bakery==1.3.3
 django-storages==1.12.3
 boto3==1.19.7
 
@@ -39,14 +38,10 @@ celery==5.2.1
 flower==1.0.0
 gunicorn==20.1.0
 Werkzeug==2.0.2
-{% if cookiecutter.use_sentry == 'y' -%}
-sentry-sdk==1.5.0
-{%- endif %}
+{% if cookiecutter.use_sentry == 'y' -%}sentry-sdk==1.5.0{%- endif %}
 
 # Code style
-{% if cookiecutter.use_black == 'y' -%}
-black==21.11b1
-{%- endif %}
+{% if cookiecutter.use_black == 'y' -%}black==21.11b1{%- endif %}
 pre-commit==2.15.0
 editorconfig-checker==2.3.54
 flake8==3.9.2
