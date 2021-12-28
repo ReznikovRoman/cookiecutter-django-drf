@@ -19,7 +19,7 @@ Docker containers:
  7. flower
 
 docker-compose files:
- 1. `docker-compose-local.yml` - for local development
+ 1. `docker-compose.yml` - for local development
 
 To run docker containers you have to create a `.env` file in the root directory.
 
@@ -119,8 +119,8 @@ DJANGO_SENTRY_ENVIRONMENT=<production>
 
 Local:
 ```shell
-docker-compose -f docker-compose-local.yml build
-docker-compose -f docker-compose-local.yml up
+docker-compose -f docker-compose.yml build
+docker-compose -f docker-compose.yml up
 ```
 
 Migrations will be applied automatically.
@@ -131,13 +131,13 @@ Migrations will be applied automatically.
 Before pushing a commit run all linters:
 
 ```shell
-docker-compose -f docker-compose-local.yml run --rm server sh -c "make check"
+docker-compose -f docker-compose.yml run --rm server sh -c "make check"
 ```
 
 You also have to add a `makefile.env` file (for pre-commit):
 ```dotenv
 # Your docker-compose file name
-DOCKER_COMPOSE_FILENAME=<docker-compose-local.yml>
+DOCKER_COMPOSE_FILENAME=<docker-compose.yml>
 ```
 
 And then run linters:
@@ -150,8 +150,8 @@ make check-docker
 
 To configure pre-commit on your local machine:
 ```shell
-docker-compose -f docker-compose-local.yml build
-docker-compose -f docker-compose-local.yml run --rm server sh -c "pre-commit install"
+docker-compose -f docker-compose.yml build
+docker-compose -f docker-compose.yml run --rm server sh -c "pre-commit install"
 ```
 
 ## Project guides

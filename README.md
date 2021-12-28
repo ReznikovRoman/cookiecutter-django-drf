@@ -53,6 +53,6 @@ $ pip install -r requirements.txt
 
 7. Build and run docker containers
 ```shell
-$ docker-compose -f docker-compose-local.yml build
-$ docker-compose -f docker-compose-local.yml up
+$ docker-compose -f docker-compose.yml build
+$ docker-compose -f docker-compose.yml up
 ```
