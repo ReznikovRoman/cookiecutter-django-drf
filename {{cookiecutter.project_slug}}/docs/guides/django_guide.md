@@ -3,7 +3,7 @@
 
 ## App structure
 
-Example for app with html templates:
+HTML Templates example:
 ```
 app
 |   __init__.py
@@ -34,12 +34,12 @@ app
 │   │   0002_fill_countries.py
 ```
 
-Example for app with DRF:
-URL routes are stored in `api.v1.<app_name>.urls`
+DRF example:
 ```
 api
 │   __init__.py
 │   permissions.py
+│   constants.py
 │   ...
 │
 └───v1
@@ -48,18 +48,19 @@ api
 │   │
 │   └───app
 │       │   __init__.py
+│       │   schema.py
+│       │   serializers.py
 │       │   urls.py
+│       │   views.py
 ```
 ```
 app
 |   __init__.py
 |   admin.py
 |   apps.py
-|   serializers.py
 |   models.py
 |   services.py
 |   tasks.py
-|   views.py
 │
 └───tests
 │   │   test_services.py
