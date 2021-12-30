@@ -166,8 +166,12 @@ SPECTACULAR_SETTINGS = {
     'VERSION': None,
     'SCHEMA_PATH_PREFIX': r'/api/v[0-9]+/',
     'SCHEMA_PATH_PREFIX_TRIM': True,
-    'SERVE_AUTHENTICATION': ['rest_framework.authentication.SessionAuthentication'],
-    'SERVE_PERMISSIONS': ['api.permissions.IsSuperUser'],
+    'SERVE_AUTHENTICATION': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'SERVE_PERMISSIONS': [
+        'api.permissions.IsSuperUser',
+    ],
     'SERVERS': [
         {'url': f'{PROJECT_FULL_DOMAIN}:8000/api/v1'},
     ],
@@ -186,7 +190,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }

@@ -14,6 +14,10 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
+# JWT AUTHENTICATION
+SIMPLE_JWT['SLIDING_TOKEN_LIFETIME'] = timedelta(minutes=60)
+
+
 # DATABASE
 DATABASES = {
     'default': {
