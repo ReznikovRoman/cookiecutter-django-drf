@@ -28,7 +28,7 @@ media*
 static*
 
 # logs
-{{cookiecutter.django_app_slug}}/logs
+*.log
 
 # celery, celery beat
 celerybeat-schedule

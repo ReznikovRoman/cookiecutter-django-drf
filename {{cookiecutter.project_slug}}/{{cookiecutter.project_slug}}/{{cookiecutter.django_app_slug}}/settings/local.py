@@ -62,13 +62,13 @@ LOGGING = {
         'file_info': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs/info.log',  # noqa: F405
+            'filename': BASE_DIR / '{{cookiecutter.django_app_slug}}/logs/info.log',  # noqa: F405
             'formatter': 'simple',
         },
         'file_error': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs/error.log',  # noqa: F405
+            'filename': BASE_DIR / '{{cookiecutter.django_app_slug}}/logs/error.log',  # noqa: F405
             'formatter': 'verbose',
         },
     },
