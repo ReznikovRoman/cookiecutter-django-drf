@@ -8,4 +8,7 @@ class MultiSerializerViewSetMixin:
 
     def get_serializer_class(self):
         """Get an appropriate serializer based on `action`."""
-        return self.serializer_action_classes.get(self.action, super().get_serializer_class())
+        try:
+            return self.serializer_action_classes[self.action]
+        except KeyError:
+            return super().get_serializer_class()
