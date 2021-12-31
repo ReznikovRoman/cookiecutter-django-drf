@@ -11,12 +11,12 @@
 
 ## Configuration
 Docker containers:
- 2. db
- 3. redis
- 4. server
- 5. celery
- 6. celery_beat
- 7. flower
+ 1. db
+ 2. redis
+ 3. server
+ 4. celery
+ 5. celery_beat
+ 6. flower
 
 docker-compose files:
  1. `docker-compose.yml` - for local development
