@@ -7,6 +7,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
 {%- endif %}
+from datetime import timedelta
 
 from .base import *  # noqa: F401, F403
 
