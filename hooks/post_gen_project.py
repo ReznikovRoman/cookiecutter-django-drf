@@ -1,5 +1,7 @@
 import os
 
+import isort
+
 
 TERMINATOR = "\x1b[0m"
 WARNING = "\x1b[1;33m [WARNING]: "
@@ -23,6 +25,11 @@ def append_to_gitignore_file(text: str) -> None:
         gitignore_file.write(os.linesep)
 
 
+def sort_imports_in_files(filenames: list[str]) -> None:
+    for filename in filenames:
+        isort.file(filename=filename)
+
+
 def main() -> None:
     ignored_filenames = [
         ".env",
@@ -31,6 +38,16 @@ def main() -> None:
     ]
     for ignored_filename in ignored_filenames:
         append_to_gitignore_file(ignored_filename)
+
+    files_to_sort_imports = [
+        os.path.join(
+            "{{cookiecutter.project_slug}}",
+            "{{cookiecutter.django_app_slug}}",
+            "settings",
+            "pro.py",
+        ),
+    ]
+    sort_imports_in_files(filenames=files_to_sort_imports)
 
     print(SUCCESS + "Project initialized!" + TERMINATOR)
 
