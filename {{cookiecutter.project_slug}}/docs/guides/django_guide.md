@@ -3,7 +3,7 @@
 
 ## App structure
 
-HTML Templates example:
+Django Templates example:
 ```
 app
 |   __init__.py
