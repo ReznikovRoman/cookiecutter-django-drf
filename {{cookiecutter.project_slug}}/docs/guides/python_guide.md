@@ -104,8 +104,8 @@ User.objects.filter(
 ```
 ```python
 courses = (
-    Course.objects.
-    filter(
+    Course.objects
+    .filter(
         id__in=[course_recommendations],
         start_at__range=course_recommendation_date_range,
     )

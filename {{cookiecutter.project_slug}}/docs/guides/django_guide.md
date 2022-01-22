@@ -12,6 +12,7 @@ app
 |   forms.py
 |   models.py
 |   services.py
+|   repositories.py
 |   tasks.py
 |   urls.py
 |   views.py
@@ -60,6 +61,7 @@ app
 |   apps.py
 |   models.py
 |   services.py
+|   repositories.py
 |   tasks.py
 │
 └───tests
@@ -71,13 +73,6 @@ app
 │   │   0001_initial.py
 │   │   0002_fill_countries.py
 ```
-
-## Cookie Cutter
-It is recommended to start project with some kind of cookiecutter.
-Having the proper structure from the start pays off.
-
-Example:
-- [django-drf cookiecutter](https://github.com/ReznikovRoman/cookiecutter-django-drf)
 
 ## Models
 Models should take care of the data model and not much else.

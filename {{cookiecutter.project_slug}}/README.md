@@ -158,4 +158,3 @@ docker-compose -f docker-compose.yml run --rm server sh -c "pre-commit install"
 
 - [Python styleguide](./docs/guides/python_guide.md)
 - [Django styleguide](./docs/guides/django_guide.md)
-

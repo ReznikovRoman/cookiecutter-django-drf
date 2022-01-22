@@ -18,7 +18,7 @@ __pycache__/
 *local.Dockerfile
 *local.Makefile
 *local-linter.sh
-*requirements.local.*
+requirements/requirements.local.in
 *dev.conf
 
 # media
