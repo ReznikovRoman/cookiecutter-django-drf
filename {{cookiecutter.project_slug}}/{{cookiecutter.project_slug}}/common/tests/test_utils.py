@@ -1,7 +1,7 @@
 from django.core.files.storage import FileSystemStorage
 from django.test import SimpleTestCase, override_settings
 
-from {{cookiecutter.django_app_slug}}.storage_backends import YandexObjectMediaStorage
+from {{cookiecutter.project_slug}}.storage_backends import YandexObjectMediaStorage
 
 from ..utils import select_file_storage
 

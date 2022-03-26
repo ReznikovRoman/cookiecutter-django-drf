@@ -42,7 +42,6 @@ def main() -> None:
     files_to_sort_imports = [
         os.path.join(
             "{{cookiecutter.project_slug}}",
-            "{{cookiecutter.django_app_slug}}",
             "settings",
             "pro.py",
         ),

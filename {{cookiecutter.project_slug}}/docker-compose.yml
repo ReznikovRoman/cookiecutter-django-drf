@@ -2,13 +2,13 @@ version: '3'
 
 services:
   db:
-    image: postgres:13-alpine
-    ports:
-      - "5432:5432"
+    image: postgres:14-alpine
     environment:
       - POSTGRES_USER=${POSTGRES_DEFAULT_USER}
       - POSTGRES_PASSWORD=${POSTGRES_DEFAULT_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
     volumes:
       - .:/app
       - postgres_data:/var/lib/postgresql/data/
@@ -17,8 +17,8 @@ services:
 
   redis:
     image: redis:6-alpine
-    expose:
-      - 6379
+    ports:
+      - "6379:6379"
     volumes:
       - redis_data:/data
     networks:
@@ -33,10 +33,10 @@ services:
     volumes:
       - .:/app
     command: >
-      bash -c "cd /app/{{cookiecutter.project_slug}}/
-      && python manage.py migrate
-      && python manage.py collectstatic --no-input
-      && python manage.py runserver 0.0.0.0:8000"
+      bash -c "cd /app
+      && django-cadmin migrate
+      && django-cadmin collectstatic --no-input
+      && django-cadmin runserver_plus --print-sql 0.0.0.0:8000"
     depends_on:
       - db
       - redis
@@ -49,8 +49,7 @@ services:
     build: .
     restart: always
     command: >
-      bash -c "cd /app/{{cookiecutter.project_slug}}/
-      && celery -A {{cookiecutter.django_app_slug}} worker -l info"
+      bash -c "cd /app && celery -A {{cookiecutter.project_slug}} worker -l info"
     volumes:
       - .:/app
     env_file:
@@ -68,8 +67,8 @@ services:
     build: .
     restart: always
     command: >
-      bash -c "cd /app/{{cookiecutter.project_slug}}/
-      && celery -A {{cookiecutter.django_app_slug}} beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+      bash -c "cd /app
+      && celery -A {{cookiecutter.project_slug}} beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
     volumes:
       - .:/app
     env_file:

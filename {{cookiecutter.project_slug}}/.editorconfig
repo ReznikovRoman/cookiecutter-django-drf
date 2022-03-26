@@ -6,6 +6,7 @@ end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
+trim_trailing_whitespace = true
 tab_width = 4
 {% if cookiecutter.use_pycharm == 'y' -%}
 ij_continuation_indent_size = 8

@@ -35,7 +35,7 @@ PYTHONUNBUFFERED=
 
 # Project
 ENVIRONMENT=<local|test|prod>
-DJANGO_SETTINGS_MODULE=<{{cookiecutter.django_app_slug}}.settings.local|{{cookiecutter.django_app_slug}}.settings.pro|{{cookiecutter.django_app_slug}}.settings.test>
+DJANGO_SETTINGS_MODULE={{cookiecutter.project_slug}}.settings
 SECRET_KEY="secure-key-912953fndfjndjkbnf2uhb5138"
 PROJECT_ALLOWED_HOSTS=<host1,host2>
 PROJECT_ALLOWED_CORS_ORIGINS=<host1,host2>
@@ -119,8 +119,8 @@ DJANGO_SENTRY_ENVIRONMENT=<production>
 
 Local:
 ```shell
-docker-compose -f docker-compose.yml build
-docker-compose -f docker-compose.yml up
+docker-compose build
+docker-compose up
 ```
 
 Migrations will be applied automatically.
@@ -131,7 +131,7 @@ Migrations will be applied automatically.
 Before pushing a commit run all linters:
 
 ```shell
-docker-compose -f docker-compose.yml run --rm server sh -c "make check"
+docker-compose run --rm server sh -c "make check"
 ```
 
 You also have to add a `makefile.env` file (for pre-commit):
@@ -140,18 +140,13 @@ You also have to add a `makefile.env` file (for pre-commit):
 DOCKER_COMPOSE_FILENAME=<docker-compose.yml>
 ```
 
-And then run linters:
-```shell
-make check-docker
-```
-
 
 ### pre-commit:
 
 To configure pre-commit on your local machine:
 ```shell
-docker-compose -f docker-compose.yml build
-docker-compose -f docker-compose.yml run --rm server sh -c "pre-commit install"
+docker-compose build
+docker-compose run --rm server sh -c "pre-commit install"
 ```
 
 ## Project guides

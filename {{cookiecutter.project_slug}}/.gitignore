@@ -13,13 +13,11 @@ __pycache__/
 /__pycache__/
 */__pycache__/
 
-# local files
-*docker-compose-dev.yml
-*local.Dockerfile
-*local.Makefile
-*local-linter.sh
-requirements/requirements.local.in
-*dev.conf
+# env data
+venv*
+venv/
+.env.local
+.env.*.local
 
 # media
 media*
@@ -31,20 +29,17 @@ static*
 *.log
 
 # celery, celery beat
-celerybeat-schedule
-*.pid
+celerybeat-schedule*
+celeryd.pid
 
 # whoosh index
 *.toc
 *.seg
 
-# js
-*comment.jsx
-*commentbox.jsx
-*commentform.jsx
-
-# env data
-venv*
-venv/
-.env.local
-.env.*.local
+# local files
+*docker-compose-dev.yml
+*local.Dockerfile
+*local.Makefile
+*local-linter.sh
+requirements/requirements.local.in
+*dev.conf

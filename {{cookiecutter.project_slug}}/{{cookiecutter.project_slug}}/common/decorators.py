@@ -2,7 +2,7 @@ from functools import wraps
 from typing import Callable
 
 
-def disable_for_loaddata(signal_handler: Callable):
+def disable_for_load_data(signal_handler: Callable):
     """Decorator that turns off signal handlers when loading fixture data."""
 
     @wraps(signal_handler)
