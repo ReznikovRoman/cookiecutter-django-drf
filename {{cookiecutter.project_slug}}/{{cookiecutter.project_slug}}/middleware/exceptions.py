@@ -2,7 +2,7 @@ import sentry_sdk
 
 from django.http import HttpRequest, JsonResponse
 
-from {{cookiecutter.project_slug}}.exceptions import ErrorCodes, TBContentError
+from {{cookiecutter.project_slug}}.exceptions import ErrorCodes, BaseError
 
 
 class ExceptionsMiddleware:
@@ -22,7 +22,7 @@ class ExceptionsMiddleware:
                 {"message": str(exception), "code": ErrorCodes.ERROR.value},
             ],
         }
-        if isinstance(exception, TBContentError):
+        if isinstance(exception, BaseError):
             error = {
                 "detail": None,
                 "errors": [

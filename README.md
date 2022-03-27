@@ -19,8 +19,7 @@ full_name [Roman Reznikov]: John Doe
 email [romanreznikov2002@yandex.ru]: john@gmail.com
 github_username [ReznikovRoman]: JohnDoe
 project_name [Django Project]: Reddit
-django_app_slug [reddit]: 
-project_slug [reddit_app]: 
+project_slug [reddit]: 
 project_short_description []: Reddit - project for ...
 timezone [Europe/Moscow]: 
 use_sentry [y]: 

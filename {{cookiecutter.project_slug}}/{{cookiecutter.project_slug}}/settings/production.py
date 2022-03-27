@@ -14,12 +14,12 @@ class Production(Base):
     CORS_ALLOWED_ORIGINS = from_environ(type=list)
 
     # MEDIA
-    if USE_S3_BUCKET:
+    if Base.USE_S3_BUCKET:
         # Yandex Object Storage settings
-        YANDEX_STORAGE_CUSTOM_DOMAIN = f'{YANDEX_STORAGE_BUCKET_NAME}.storage.yandexcloud.net'
+        YANDEX_STORAGE_CUSTOM_DOMAIN = f'{Base.YANDEX_STORAGE_BUCKET_NAME}.storage.yandexcloud.net'
         DEFAULT_FILE_STORAGE = 'storage_backends.YandexObjectMediaStorage'
-        AWS_ACCESS_KEY_ID = os.environ.get('YANDEX_STORAGE_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = os.environ.get('YANDEX_STORAGE_SECRET_ACCESS_KEY')
+        AWS_ACCESS_KEY_ID = from_environ("", name='YANDEX_STORAGE_ACCESS_KEY_ID', type=str)
+        AWS_SECRET_ACCESS_KEY = from_environ("", name='YANDEX_STORAGE_SECRET_ACCESS_KEY', type=str)
         AWS_S3_ENDPOINT_URL = 'https://storage.yandexcloud.net'
         AWS_S3_REGION_NAME = 'ru-central1'
 
@@ -36,7 +36,7 @@ class Production(Base):
         'UPDATE_LAST_LOGIN': False,
 
         'ALGORITHM': 'HS256',
-        'SIGNING_KEY': SECRET_KEY,
+        'SIGNING_KEY': Base.SECRET_KEY,
         'VERIFYING_KEY': None,
         'AUDIENCE': None,
         'ISSUER': None,

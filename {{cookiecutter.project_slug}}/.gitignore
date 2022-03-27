@@ -36,10 +36,12 @@ celeryd.pid
 *.toc
 *.seg
 
-# local files
+# local configurations and overrides
 *docker-compose-dev.yml
 *local.Dockerfile
 *local.Makefile
 *local-linter.sh
-requirements/requirements.local.in
 *dev.conf
+requirements/requirements.local.*
+
+# FIXME: files from `post_gen_project` hook

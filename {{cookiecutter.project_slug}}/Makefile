@@ -1,16 +1,7 @@
-include makefile.env
-export
-
-# TODO:
-# 1. Add local configuration (settings/local.py)
-# 2. Refactor .env file (add missing variables, remove redundant ones)
-# 3. Change docs
-# 4. Test project
-
-REQUIREMENTS_DIR := requirements
 {% if cookiecutter.use_black == 'y' -%}
 BLACK_RUN_ARGS := --generate-hashes --no-header --verbose
 {%- endif %}
+REQUIREMENTS_DIR := requirements
 PIP_COMPILE_ARGS := --generate-hashes --no-header --no-emit-index-url --verbose
 PIP_COMPILE := cd $(REQUIREMENTS_DIR) && pip-compile $(PIP_COMPILE_ARGS)
 

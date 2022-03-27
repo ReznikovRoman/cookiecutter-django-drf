@@ -35,18 +35,10 @@ def main() -> None:
         ".env",
         "makefile.env",
         ".envs/*",
+        "/*/settings/local.py",
     ]
     for ignored_filename in ignored_filenames:
         append_to_gitignore_file(ignored_filename)
-
-    files_to_sort_imports = [
-        os.path.join(
-            "{{cookiecutter.project_slug}}",
-            "settings",
-            "pro.py",
-        ),
-    ]
-    sort_imports_in_files(filenames=files_to_sort_imports)
 
     print(SUCCESS + "Project initialized!" + TERMINATOR)
 

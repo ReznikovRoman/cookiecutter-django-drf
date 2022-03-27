@@ -3,21 +3,21 @@ pillow==8.4.0
 requests==2.26.0
 shortuuid==1.0.8
 python-slugify==5.0.2
-ipython==7.28.0
+ipython==8.1.1
 boto3==1.19.7
 faker==10.0.0
 pydantic==1.8.2
 
 # Django
 django==4.0.3
-django-configurations==2.3.1
+django-configurations==2.3.2
 django-object-actions==3.0.2
 django-tinymce==3.4.0
 django-extensions==3.1.5
 django-model-utils==4.2.0
 django-debug-toolbar==3.2.4
 django-tinymce==3.4.0
-django-celery-beat==2.2.1
+django-celery-beat==2.2.1  # TODO: bump version (currently `django-celery-beat` does not support Django 4)
 django-cleanup==6.0.0
 django-storages==1.12.3
 

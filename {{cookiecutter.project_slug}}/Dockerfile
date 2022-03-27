@@ -17,8 +17,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         musl-dev \
         curl \
         libc-dev \
+        libcurl4-gnutls-dev \
+        librtmp-dev \
+        postgresql-client-common \
         postgresql-client \
-        postgresql-contrib \
         netcat \
         && \
     apt-get clean && \

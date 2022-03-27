@@ -1,12 +1,10 @@
-version: '3'
-
 services:
   db:
     image: postgres:14-alpine
     environment:
-      - POSTGRES_USER=${POSTGRES_DEFAULT_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_DEFAULT_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
     ports:
       - "5432:5432"
     volumes:
@@ -17,8 +15,8 @@ services:
 
   redis:
     image: redis:6-alpine
-    ports:
-      - "6379:6379"
+    expose:
+      - 6379
     volumes:
       - redis_data:/data
     networks:
@@ -34,9 +32,9 @@ services:
       - .:/app
     command: >
       bash -c "cd /app
-      && django-cadmin migrate
-      && django-cadmin collectstatic --no-input
-      && django-cadmin runserver_plus --print-sql 0.0.0.0:8000"
+      && python manage.py migrate
+      && python manage.py collectstatic --no-input
+      && python manage.py runserver_plus --print-sql 0.0.0.0:8000"
     depends_on:
       - db
       - redis
@@ -83,11 +81,15 @@ services:
   flower:
     image: mher/flower:0.9.5
     env_file:
-      - ${ENV}
-    networks:
-      app-network:
-        aliases:
-          - flower
+      - $ENV
+    environment:
+      - CELERY_BROKER_URL=$REDIS_BROKER_URL
+      - FLOWER_PORT=8888
+    ports:
+      - "8888:8888"
+    depends_on:
+      - celery
+      - redis
 
 volumes:
   postgres_data:

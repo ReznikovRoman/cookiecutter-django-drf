@@ -14,7 +14,7 @@ from sentry_sdk.integrations.redis import RedisIntegration
 
 from django.utils.functional import cached_property
 
-from tb_content.logging import LoggerDescriptor
+from {{cookiecutter.project_slug}}.logging import LoggerDescriptor
 
 from .values import from_environ
 
@@ -62,7 +62,6 @@ class Base(Configuration):
         'django_extensions',
         'django_filters',
         'django_celery_beat',
-        'sorl.thumbnail',
         'storages',
         'tinymce',
         'django_object_actions',
@@ -277,7 +276,7 @@ class Base(Configuration):
 
     # Celery
     CELERY_TIMEZONE = '{{cookiecutter.timezone}}'
-    CELERY_BROKER_URL = from_environ(name='CELERY_BROKER_URL')
+    CELERY_BROKER_URL = from_environ(name='REDIS_BROKER_URL')
     CELERY_ACCEPT_CONTENT = ['application/json']
     CELERY_RESULT_SERIALIZER = 'json'
     CELERY_TASK_SERIALIZER = 'json'
@@ -287,7 +286,7 @@ class Base(Configuration):
     CELERY_REDIS_MAX_CONNECTIONS = 20
     CELERYD_MAX_TASKS_PER_CHILD = 100
 
-    {% if cookiecutter.use_sentry == 'y' - %}
+    {% if cookiecutter.use_sentry == 'y' -%}
     # Sentry settings
     SENTRY_DSN = from_environ(None)
     SENTRY_TRACES_SAMPLE_RATE = from_environ(1.0, type=float)
@@ -323,22 +322,17 @@ class Base(Configuration):
 
     # S3 Bucket
     USE_S3_BUCKET = from_environ(False, type=bool)
-    YANDEX_STORAGE_BUCKET_NAME = from_environ()
+    YANDEX_STORAGE_BUCKET_NAME = from_environ("", type=str)
 
     # CHARSET
     DEFAULT_CHARSET = from_environ("utf-8")
 
-    # MESSAGES
-    MESSAGE_TAGS = {
-        messages_constants.DEBUG: 'alert-secondary',
-        messages_constants.INFO: 'alert-info',
-        messages_constants.SUCCESS: 'alert-success',
-        messages_constants.WARNING: 'alert-warning',
-        messages_constants.ERROR: 'alert-danger',
-    }
-
     # https://github.com/jazzband/django-configurations/issues/323
     _DEFAULT_AUTO_FIELD = DEFAULT_AUTO_FIELD
+
+    # SITES
+    SITE_ID = 1
+    DEFAULT_PROTOCOL = from_environ("http", name="SITE_DEFAULT_PROTOCOL")
 
     @classmethod
     def setup(cls):
@@ -354,7 +348,7 @@ class Base(Configuration):
         logging.basicConfig(level=logging.INFO, format='*** %(message)s')
         cls.log.info(f'Starting {cls.PROJECT_NAME} project using {cls.__name__} configuration')
 
-        {% if cookiecutter.use_sentry == 'y' - %}
+        {% if cookiecutter.use_sentry == 'y' -%}
         if cls.SENTRY_DSN:
             cls.log.info(f'Sentry is enabled, environment: {cls.PROJECT_ENVIRONMENT}')
             sentry_sdk.init(
@@ -370,7 +364,7 @@ class Base(Configuration):
             )
         else:
             cls.log.info('Sentry is disabled')
-        {% - endif %}
+        {%- endif %}
 
     @classmethod
     def _fix_relative_urls(cls):
